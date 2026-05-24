@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DoorOpen, Activity, FlaskConical, Users } from "lucide-react";
 import { ModulePage } from "@/components/module-page";
+import { NexusDashboard } from "@/components/dashboards/nexus-dashboard";
+import character from "@/assets/character-nexus.jpg";
 
 export const Route = createFileRoute("/nexus")({
   head: () => ({
@@ -20,40 +22,49 @@ function NexusPage() {
       tagline="For manufacturing excellence."
       description="Real-time digitization of shop-floor machine logs, security gates, lab results, and workforce attendance. The control tower for the people who run the plant."
       accent="nexus"
-      variant="factory"
+      character={character}
+      pitch="If a factory HOD earns ₹1.5L/month and spends 25% on clerical verification, you save ₹37,500 per person — every month. Add a clerk and one mitigated fine, and the ₹65k retainer pays for itself five times over."
       features={[
-        { name: "Gate-Keep", desc: "Automated shift-entry, security logs, and compliance verification at the entry point.", icon: DoorOpen },
-        { name: "Floor-Pulse", desc: "Real-time digitization of shop-floor machine logs and hourly production charts.", icon: Activity },
-        { name: "Lab-Link", desc: "Digitization of handwritten lab test results, sample tracking, and reagent logs.", icon: FlaskConical },
-        { name: "Work-Force", desc: "Digitization of attendance, safety training logs, and on-site workforce certifications.", icon: Users },
-      ]}
-      kpis={[
-        { label: "OEE today", value: "82.4%", delta: "+6.1% vs last week", tone: "up" },
-        { label: "Shift reports auto-closed", value: "37 / 42", delta: "5 pending review", tone: "warn" },
-        { label: "Unplanned stops", value: "3", delta: "−4 vs avg", tone: "up" },
-        { label: "Comp certs valid", value: "98.2%", delta: "12 expiring < 30d", tone: "warn" },
-      ]}
-      trendName="Floor-Pulse · OEE last 24h"
-      trendData={[
-        { t: "00", v: 71 }, { t: "03", v: 68 }, { t: "06", v: 75 }, { t: "09", v: 82 },
-        { t: "12", v: 79 }, { t: "15", v: 86 }, { t: "18", v: 84 }, { t: "21", v: 81 },
-      ]}
-      barName="Production by line (units)"
-      barData={[
-        { t: "L1", v: 412 }, { t: "L2", v: 388 }, { t: "L3", v: 461 }, { t: "L4", v: 297 }, { t: "L5", v: 502 },
-      ]}
-      events={[
-        { time: "12 min ago · Line 2", text: "Floor-Pulse detected idle spike, supervisor pinged.", tone: "alert" },
-        { time: "38 min ago · Gate 1", text: "Shift-B entry roster auto-reconciled.", tone: "ok" },
-        { time: "1 hr ago · Lab 3", text: "Sample LAB-2244 OCR'd into LIMS.", tone: "ok" },
-        { time: "2 hr ago · Press bay", text: "Cert renewal pending — 4 operators.", tone: "warn" },
+        {
+          name: "Gate-Keep",
+          icon: DoorOpen,
+          desc: "Automated shift-entry, security logs, and compliance verification at the entry point.",
+          longDesc: "Replaces the paper-based gate register with an AI-vision pipeline that captures vehicle plates, badge IDs, and contractor permits in under a second — and reconciles them against shift roster, training expiry, and PPE compliance before the worker steps onto the floor.",
+          bullets: ["ANPR + badge OCR", "Shift roster reconciliation", "PPE/training compliance gate", "Visitor & contractor audit trail"],
+          stat: { value: "−74%", label: "Gate-to-floor wait time" },
+        },
+        {
+          name: "Floor-Pulse",
+          icon: Activity,
+          desc: "Real-time digitization of shop-floor machine logs and hourly production charts.",
+          longDesc: "Operators photograph the machine HMI or paper hourly chart. Mushai parses production count, downtime reason codes, and operator notes — and streams a structured OEE signal into your ERP before the next shift handover.",
+          bullets: ["HMI + paper-chart OCR", "Live OEE & downtime reason codes", "ERP / SAP push", "Shift-end report auto-generation"],
+          stat: { value: "−72%", label: "Shift-end reporting time" },
+        },
+        {
+          name: "Lab-Link",
+          icon: FlaskConical,
+          desc: "Digitization of handwritten lab test results, sample tracking, and reagent logs.",
+          longDesc: "Captures handwritten chemical and physical lab test sheets, maps them to sample IDs, and pushes results to LIMS / ERP. Catches out-of-spec readings the moment they're written — not the morning after.",
+          bullets: ["Handwritten lab-sheet OCR", "Sample ID + reagent tracking", "Out-of-spec auto-alerts", "LIMS / ERP sync"],
+          stat: { value: "12s", label: "Lab sheet → LIMS" },
+        },
+        {
+          name: "Work-Force",
+          icon: Users,
+          desc: "Digitization of attendance, safety training logs, and on-site workforce certifications.",
+          longDesc: "Tracks attendance, safety inductions, and skill certifications for every direct and contract worker. Stops uncertified operators from entering restricted zones — and surfaces expiring credentials 30 days ahead.",
+          bullets: ["Attendance + biometric ingest", "Skill / safety cert vault", "Restricted-zone access logic", "30-day expiry early warning"],
+          stat: { value: "0", label: "Expired-cert incidents" },
+        },
       ]}
       proof={[
         { stat: "11 wks", label: "Average payback" },
-        { stat: "−72%", label: "Shift-end reporting time" },
+        { stat: "−72%", label: "Reporting time" },
         { stat: "5×", label: "Retainer ROI" },
-        { stat: "₹37.5K", label: "Saved per HOD / mo" },
+        { stat: "₹37.5K", label: "Saved / HOD / mo" },
       ]}
+      dashboard={<NexusDashboard />}
     />
   );
 }

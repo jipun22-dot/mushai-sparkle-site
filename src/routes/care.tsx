@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { ClipboardPlus, Bot, Activity, ShieldAlert } from "lucide-react";
 import { ModulePage } from "@/components/module-page";
+import { CareDashboard } from "@/components/dashboards/care-dashboard";
+import character from "@/assets/character-care.jpg";
 
 export const Route = createFileRoute("/care")({
   head: () => ({
@@ -20,40 +22,49 @@ function CarePage() {
       tagline="For healthcare accuracy."
       description="Eliminate clerical drag at the bedside. Vitals digitized, ERP entries automated, early warnings surfaced, and claim leakage stopped before discharge."
       accent="care"
-      variant="ward"
+      character={character}
+      pitch="Save 2 hours per nurse across 3 shifts and you've added 2 nurses to the floor — without hiring anyone. That's ₹60,000/month in latent labor, plus a system that prevents the ₹10–50L medical-negligence event."
       features={[
-        { name: "Nurse-Assist", desc: "Scans handwritten vitals, medication slips, and bedside observations.", icon: ClipboardPlus },
-        { name: "Bridge-Bot", desc: "Automatically types the OCR data into the hospital's legacy ERP / HIS.", icon: Bot },
-        { name: "Vital-View", desc: "Real-time trend analysis and 'Early Warning' alerts for senior doctors.", icon: Activity },
-        { name: "Claim-Guard", desc: "Scans discharge summaries vs. billable medicines and procedures.", icon: ShieldAlert },
-      ]}
-      kpis={[
-        { label: "Charts auto-entered", value: "1,284", delta: "+312 vs yesterday", tone: "up" },
-        { label: "Early warnings", value: "7", delta: "2 escalated", tone: "warn" },
-        { label: "Claim leakage stopped", value: "₹3.2L", delta: "this week", tone: "up" },
-        { label: "Nurse hrs recovered", value: "62h", delta: "= 2 FTEs", tone: "up" },
-      ]}
-      trendName="Vital-View · risk score trend"
-      trendData={[
-        { t: "06", v: 22 }, { t: "08", v: 31 }, { t: "10", v: 28 }, { t: "12", v: 44 },
-        { t: "14", v: 38 }, { t: "16", v: 29 }, { t: "18", v: 35 }, { t: "20", v: 26 },
-      ]}
-      barName="Claim variance by department (₹k)"
-      barData={[
-        { t: "ICU", v: 142 }, { t: "Ortho", v: 88 }, { t: "Cardio", v: 119 }, { t: "Onco", v: 73 }, { t: "ER", v: 96 },
-      ]}
-      events={[
-        { time: "2 min ago · ICU bay 3", text: "Vital-View flagged tachycardia trend — senior pinged.", tone: "alert" },
-        { time: "14 min ago · Ward 5", text: "Bridge-Bot synced 42 vitals into HIS.", tone: "ok" },
-        { time: "33 min ago · Discharge desk", text: "Claim-Guard caught missing imaging line item.", tone: "warn" },
-        { time: "1 hr ago · Ward 2", text: "Nurse-Assist OCR'd shift notebook — 28 entries.", tone: "ok" },
+        {
+          name: "Nurse-Assist",
+          icon: ClipboardPlus,
+          desc: "Scans handwritten vitals, medication slips, and bedside observations.",
+          longDesc: "Nurses photograph the vitals chart at the end of every round. Mushai OCRs HR, BP, SpO₂, temp, and free-text notes — and ships them to the HIS, freeing 2+ hours per nurse per shift.",
+          bullets: ["Vitals + medication OCR", "Handwriting nuance trained on Indian charts", "HIS push", "Audit trail per entry"],
+          stat: { value: "2 hr", label: "Per nurse · per shift" },
+        },
+        {
+          name: "Bridge-Bot",
+          icon: Bot,
+          desc: "Automatically types OCR'd data into the hospital's legacy ERP / HIS.",
+          longDesc: "Most hospital systems were never built for API integration. Bridge-Bot mimics human keystrokes — auto-populating ICU charts, billing screens, and discharge summaries on legacy UIs with zero IT change request.",
+          bullets: ["RPA on legacy HIS UI", "Zero-API integration", "Field-validation guardrails", "Full keystroke audit log"],
+          stat: { value: "0", label: "IT change requests" },
+        },
+        {
+          name: "Vital-View",
+          icon: Activity,
+          desc: "Real-time trend analysis and Early Warning Score alerts for senior doctors.",
+          longDesc: "Continuously scores every active patient with NEWS2 / MEWS, surfaces drift before deterioration, and pings the on-call senior the moment the threshold is crossed — even if the nurse hasn't escalated.",
+          bullets: ["NEWS2 / MEWS scoring", "Drift detection", "Senior on-call escalation", "Bedside mobile alerts"],
+          stat: { value: "−41%", label: "Code-blue events" },
+        },
+        {
+          name: "Claim-Guard",
+          icon: ShieldAlert,
+          desc: "Scans discharge summaries vs. billable medicines and procedures.",
+          longDesc: "Before the patient walks out, Claim-Guard reconciles every billable line item against the discharge summary, prescription, and procedure log. Stops insurance-rejection leakage at the source.",
+          bullets: ["Line-item reconciliation", "Insurance T&C engine", "Pre-discharge flag", "Revenue-cycle dashboard"],
+          stat: { value: "−38%", label: "Claim leakage" },
+        },
       ]}
       proof={[
-        { stat: "2 hrs", label: "Saved per nurse / shift" },
+        { stat: "2 hr", label: "Saved / nurse / shift" },
         { stat: "₹60K", label: "Latent labor / mo" },
-        { stat: "−38%", label: "Discharge claim leakage" },
+        { stat: "−38%", label: "Claim leakage" },
         { stat: "₹15L", label: "Annual retainer" },
       ]}
+      dashboard={<CareDashboard />}
     />
   );
 }

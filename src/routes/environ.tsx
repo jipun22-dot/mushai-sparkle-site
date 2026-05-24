@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { FileCheck2, ShieldCheck, NotebookPen, Leaf } from "lucide-react";
 import { ModulePage } from "@/components/module-page";
+import { EnvironDashboard } from "@/components/dashboards/environ-dashboard";
+import character from "@/assets/character-environ.jpg";
 
 export const Route = createFileRoute("/environ")({
   head: () => ({
@@ -20,40 +22,49 @@ function EnvironPage() {
       tagline="For EHS & sustainability."
       description="Track permits, audits, certifications, safety observations, and the carbon load — without the paper backlog. Audit-ready, every hour."
       accent="environ"
-      variant="industrial"
+      character={character}
+      pitch="One missed permit, one expired extinguisher, one un-reconciled fuel receipt — each one a ₹5L fine waiting. Environ stops them at the source and turns your EHS team into a forward-looking sustainability function."
       features={[
-        { name: "Permit-Check", desc: "Scans 'Work at Height' or 'Hot Work' paper permits at the site.", icon: FileCheck2 },
-        { name: "Cert-Watch", desc: "Scans the physical expiry dates on fire extinguishers and machinery.", icon: ShieldCheck },
-        { name: "Log-Vision", desc: "Digitizes handwritten 'Safety Observation' booklets from the floor.", icon: NotebookPen },
-        { name: "Eco-Audit", desc: "Scans fuel & waste receipts to calculate the factory's carbon footprint.", icon: Leaf },
-      ]}
-      kpis={[
-        { label: "Permits active", value: "146", delta: "12 expiring < 7d", tone: "warn" },
-        { label: "Safety obs (today)", value: "84", delta: "+19 vs avg", tone: "up" },
-        { label: "Audit-ready zones", value: "94%", delta: "Zone D pending", tone: "warn" },
-        { label: "Carbon footprint", value: "182t", delta: "−6.4% MoM", tone: "up" },
-      ]}
-      trendName="Emission load (tCO₂) — last 8 weeks"
-      trendData={[
-        { t: "W1", v: 210 }, { t: "W2", v: 205 }, { t: "W3", v: 198 }, { t: "W4", v: 201 },
-        { t: "W5", v: 192 }, { t: "W6", v: 188 }, { t: "W7", v: 184 }, { t: "W8", v: 182 },
-      ]}
-      barName="Open observations by category"
-      barData={[
-        { t: "PPE", v: 18 }, { t: "Spill", v: 7 }, { t: "Permit", v: 12 }, { t: "Cert", v: 9 }, { t: "Other", v: 14 },
-      ]}
-      events={[
-        { time: "4 min ago · Zone D", text: "Permit-Check flagged expired hot work permit.", tone: "alert" },
-        { time: "26 min ago · Tank Farm", text: "Vent emission within range, logged.", tone: "ok" },
-        { time: "1 hr ago · Warehouse", text: "Extinguisher #314 expiry in 9 days.", tone: "warn" },
-        { time: "3 hr ago · Eco-Audit", text: "Diesel receipts reconciled — ₹2.4L logged.", tone: "ok" },
+        {
+          name: "Permit-Check",
+          icon: FileCheck2,
+          desc: "Scans paper Work-at-Height, Hot-Work, and Confined-Space permits at the site.",
+          longDesc: "Captures permit details, validity windows, signatories, and isolation checklists at the moment of issue. Sends countdown alerts before expiry and blocks closure until every JSA item is reconciled.",
+          bullets: ["Permit OCR at point-of-issue", "Auto countdown + escalation", "Digital JSA reconciliation", "Closure-block on open items"],
+          stat: { value: "0", label: "Expired permits on floor" },
+        },
+        {
+          name: "Cert-Watch",
+          icon: ShieldCheck,
+          desc: "Scans physical expiry dates on extinguishers, lifting gear, and machinery.",
+          longDesc: "A field tech walks the plant and photographs equipment tags. Mushai extracts asset ID, last service date, and expiry — then schedules renewals and routes them to the responsible vendor automatically.",
+          bullets: ["Tag-photo asset registry", "Service-due scheduling", "Vendor routing", "Heat-map of cert risk"],
+          stat: { value: "−68%", label: "Audit prep time" },
+        },
+        {
+          name: "Log-Vision",
+          icon: NotebookPen,
+          desc: "Digitizes handwritten safety observation booklets from the floor.",
+          longDesc: "Every supervisor's pocket booklet becomes a structured database. Mushai categorizes near-misses, PPE breaches, and spills by zone — and trends them against your safety pyramid.",
+          bullets: ["Handwriting + sketch OCR", "Near-miss categorization", "Zone-level safety pyramid", "Weekly trend alerts"],
+          stat: { value: "+34%", label: "Reported near-misses" },
+        },
+        {
+          name: "Eco-Audit",
+          icon: Leaf,
+          desc: "Scans fuel & waste receipts to calculate the factory's carbon footprint.",
+          longDesc: "Captures diesel chits, electricity bills, and waste manifests. Converts each to tCO₂e using updated India-grid factors and rolls them into a board-ready ESG report — automatically.",
+          bullets: ["Receipt + manifest OCR", "India-grid tCO₂e math", "Scope 1 / 2 / 3 split", "Board-ready ESG export"],
+          stat: { value: "−6.4%", label: "MoM emission load" },
+        },
       ]}
       proof={[
-        { stat: "−68%", label: "Audit prep time" },
-        { stat: "₹5L", label: "Avg fine mitigated / yr" },
-        { stat: "0", label: "Missed cert renewals" },
+        { stat: "−68%", label: "Audit prep" },
+        { stat: "₹5L", label: "Avg fine mitigated" },
+        { stat: "0", label: "Missed renewals" },
         { stat: "6.4%", label: "Carbon reduction" },
       ]}
+      dashboard={<EnvironDashboard />}
     />
   );
 }
