@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { FloatingTestimonials } from "@/components/floating-testimonials";
 import { CostCalculator } from "@/components/cost-calculator";
 import { LeadForm } from "@/components/lead-form";
+import { ControlTower } from "@/components/control-tower";
+import { SwipeableFeatures } from "@/components/swipeable-features";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -93,7 +95,7 @@ function Home() {
             </motion.div>
           </div>
           <div className="lg:col-span-5 relative">
-            <HeroPanel />
+            <ControlTower />
           </div>
         </div>
       </section>
@@ -192,6 +194,8 @@ function Home() {
         </div>
       </section>
 
+      <SwipeableFeatures />
+
       <CostCalculator />
       <FloatingTestimonials />
 
@@ -202,60 +206,6 @@ function Home() {
         </div>
       </section>
     </>
-  );
-}
-
-function HeroPanel() {
-  const items = [
-    { label: "DOWNTIME ALERT", v: 86, c: "var(--primary)" },
-    { label: "PRODUCTION DELAY", v: 64, c: "var(--primary)" },
-    { label: "MANUAL REPORTING", v: 42, c: "var(--primary)" },
-    { label: "AUDIT RISK", v: 71, c: "var(--primary)" },
-  ];
-  return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3, duration: 0.8 }}
-      className="relative aspect-[5/6] rounded-[2rem] border border-border bg-card/80 backdrop-blur p-7 shadow-elegant overflow-hidden"
-    >
-      <div className="absolute inset-0 bg-grid opacity-30" />
-      <div className="relative flex items-start justify-between">
-        <div>
-          <div className="font-display text-[10px] tracking-[0.32em] text-muted-foreground">CONTROL TOWER</div>
-          <h3 className="mt-1.5 font-display text-xl">SHIFT B · LIVE</h3>
-        </div>
-        <div className="flex items-center gap-1.5 text-[11px]">
-          <span className="h-2 w-2 rounded-full bg-primary animate-pulse" /> 12 signals
-        </div>
-      </div>
-      <div className="relative mt-7 space-y-3">
-        {items.map((it, i) => (
-          <motion.div
-            key={it.label}
-            initial={{ opacity: 0, x: 18 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.5 + i * 0.12 }}
-            className="rounded-xl border border-border bg-background/60 p-3.5"
-          >
-            <div className="flex items-center justify-between text-[11px]">
-              <span className="font-display tracking-[0.2em] text-muted-foreground">{it.label}</span>
-              <span className="text-primary font-medium">{it.v}%</span>
-            </div>
-            <div className="mt-2 h-1 rounded-full bg-muted overflow-hidden">
-              <motion.div initial={{ width: 0 }} animate={{ width: `${it.v}%` }} transition={{ delay: 0.7 + i * 0.12, duration: 1, ease: "easeOut" }}
-                className="h-full rounded-full" style={{ background: it.c }} />
-            </div>
-          </motion.div>
-        ))}
-      </div>
-      <div className="relative mt-6 grid grid-cols-3 gap-2">
-        {Array.from({ length: 18 }).map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1 + i * 0.03 }}
-            className="aspect-square rounded-md"
-            style={{ background: `color-mix(in oklab, var(--primary) ${(Math.sin(i) * 0.5 + 0.5) * 80 + 10}%, transparent)` }}
-          />
-        ))}
-      </div>
-    </motion.div>
   );
 }
 
@@ -276,9 +226,7 @@ function DelayPanel() {
         <div className="absolute inset-0 rounded-full border border-primary/20 animate-pulse-ring" />
       </div>
       {tiles.map((t, i) => {
-        const positions = [
-          "top-0 left-0", "top-0 right-0", "bottom-0 left-0", "bottom-0 right-0",
-        ];
+        const positions = ["top-0 left-0", "top-0 right-0", "bottom-0 left-0", "bottom-0 right-0"];
         return (
           <motion.div
             key={t.label}
