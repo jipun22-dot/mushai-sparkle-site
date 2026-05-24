@@ -233,7 +233,7 @@ export function CareDashboard() {
   );
 }
 
-function Vital({ icon: Icon, label, value, unit, tone }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string; unit: string; tone: BedStatus }) {
+function Vital({ icon: Icon, label, value, unit, tone }: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>; label: string; value: string; unit: string; tone: BedStatus }) {
   return (
     <div className="rounded-xl border border-border bg-surface-2 p-3">
       <Icon className="h-3.5 w-3.5 mx-auto" style={{ color: statusColor[tone] }} />

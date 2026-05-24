@@ -206,7 +206,7 @@ export function EnvironDashboard() {
   );
 }
 
-function Row({ icon: Icon, label, value, tone }: { icon: React.ComponentType<{ className?: string }>; label: string; value: string; tone: ZoneStatus }) {
+function Row({ icon: Icon, label, value, tone }: { icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>; label: string; value: string; tone: ZoneStatus }) {
   return (
     <div className="flex items-center gap-3 rounded-xl border border-border bg-surface-2 p-3">
       <Icon className="h-4 w-4" style={{ color: statusColor[tone] }} />

@@ -8,7 +8,7 @@ type Signal = {
   zone: string;
   level: number; // 0-100
   tone: "ok" | "warn" | "alert";
-  icon: React.ComponentType<{ className?: string }>;
+  icon: React.ComponentType<{ className?: string; style?: React.CSSProperties }>;
 };
 
 const seed: Signal[] = [
