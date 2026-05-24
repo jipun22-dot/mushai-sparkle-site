@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { FloatingTestimonials } from "@/components/floating-testimonials";
 import { CostCalculator } from "@/components/cost-calculator";
 import { LeadForm } from "@/components/lead-form";
+import { ControlTower } from "@/components/control-tower";
+import { SwipeableFeatures } from "@/components/swipeable-features";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -93,7 +95,7 @@ function Home() {
             </motion.div>
           </div>
           <div className="lg:col-span-5 relative">
-            <HeroPanel />
+            <ControlTower />
           </div>
         </div>
       </section>
