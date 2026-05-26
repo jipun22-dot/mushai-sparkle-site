@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { FileCheck2, ShieldCheck, NotebookPen, Leaf } from "lucide-react";
 import { ModulePage } from "@/components/module-page";
 import { EnvironDashboard } from "@/components/dashboards/environ-dashboard";
-import character from "@/assets/mascot-care.jpg".replace("care","environ") /* placeholder */;
+import character from "@/assets/mascot-environ.jpg";
 
 export const Route = createFileRoute("/environ")({
   head: () => ({
