@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { DoorOpen, Activity, FlaskConical, Users } from "lucide-react";
 import { ModulePage } from "@/components/module-page";
 import { NexusDashboard } from "@/components/dashboards/nexus-dashboard";
-import character from "@/assets/character-nexus.jpg";
+import character from "@/assets/mascot-nexus.jpg";
 
 export const Route = createFileRoute("/nexus")({
   head: () => ({

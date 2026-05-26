@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { ClipboardPlus, Bot, Activity, ShieldAlert } from "lucide-react";
 import { ModulePage } from "@/components/module-page";
 import { CareDashboard } from "@/components/dashboards/care-dashboard";
-import character from "@/assets/character-care.jpg";
+import character from "@/assets/mascot-care.jpg";
 
 export const Route = createFileRoute("/care")({
   head: () => ({
