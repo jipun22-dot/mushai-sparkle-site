@@ -51,12 +51,14 @@ export function ModulePage(props: ModulePageProps) {
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.8 }}
             className="lg:col-span-5 relative">
-            <div className="relative rounded-[2rem] border border-border bg-card p-6 shadow-elegant overflow-hidden">
-              <div className="absolute inset-x-0 bottom-0 h-32 wave-lines opacity-70" />
-              <img src={props.character} alt={`${props.name} module character illustration`} width={1024} height={1024} loading="lazy" className="relative w-full aspect-square object-contain" />
-              <div className="relative mt-2 rounded-2xl border border-border bg-surface-2 p-4">
-                <div className="font-display text-[10px] tracking-[0.32em] text-primary">THE PITCH</div>
-                <p className="mt-2 text-sm text-foreground/80">{props.pitch}</p>
+            <div className="relative rounded-[2rem] border border-border bg-white p-0 shadow-elegant overflow-hidden">
+              <img src={props.character} alt={`${props.name} module mascot`} width={1024} height={1024} loading="lazy" className="relative w-full aspect-[4/5] object-cover" />
+              <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-3 py-1.5 text-[10px] font-medium" style={{ color: accent }}>
+                <span className="h-1.5 w-1.5 rounded-full" style={{ background: accent }} /> {props.slug.toUpperCase()} MODULE
+              </div>
+              <div className="relative p-5 border-t border-border bg-white text-neutral-900">
+                <div className="font-display text-[10px] tracking-[0.32em]" style={{ color: accent }}>THE PITCH</div>
+                <p className="mt-2 text-sm text-neutral-700">{props.pitch}</p>
               </div>
             </div>
           </motion.div>
