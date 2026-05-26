@@ -1,205 +1,265 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Factory, Leaf, HeartPulse, Zap, ShieldCheck, BarChart3, Workflow, Sparkles } from "lucide-react";
+import { ArrowRight, ArrowUpRight, Factory, Leaf, HeartPulse, Zap, ShieldCheck, BarChart3, Workflow, Sparkles, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FloatingTestimonials } from "@/components/floating-testimonials";
 import { CostCalculator } from "@/components/cost-calculator";
 import { LeadForm } from "@/components/lead-form";
 import { ControlTower } from "@/components/control-tower";
 import { SwipeableFeatures } from "@/components/swipeable-features";
+import mascotTrio from "@/assets/mascots-trio.jpg";
+import mascotNexus from "@/assets/mascot-nexus.jpg";
+import mascotEnviron from "@/assets/mascot-environ.jpg";
+import mascotCare from "@/assets/mascot-care.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
       { title: "Mushai Systems — Automate. Integrate. Elevate." },
-      { name: "description", content: "Digitize the physical world. Nexus, Environ, Care — three modules, one intelligent advantage." },
+      { name: "description", content: "Three modules, one intelligent system. Nexus for manufacturing, Environ for EHS, Care for healthcare." },
     ],
   }),
   component: Home,
 });
 
 const modules = [
-  {
-    slug: "nexus", to: "/nexus", icon: Factory,
-    name: "NEXUS", color: "var(--nexus)",
-    tag: "For Manufacturing Excellence",
-    bullets: ["Digitize shop floor in real time", "Boost productivity & efficiency", "Manage workforce & compliance"],
-  },
-  {
-    slug: "environ", to: "/environ", icon: Leaf,
-    name: "ENVIRON", color: "var(--environ)",
-    tag: "For EHS & Sustainability",
-    bullets: ["Ensure safety & health compliance", "Track permits, audits, certifications", "Monitor sustainability & carbon"],
-  },
-  {
-    slug: "care", to: "/care", icon: HeartPulse,
-    name: "CARE", color: "var(--care)",
-    tag: "For Healthcare Accuracy",
-    bullets: ["Digitize clinical data & records", "Improve accuracy & decisions", "Audit-ready compliance"],
-  },
+  { slug: "nexus", to: "/nexus", icon: Factory, name: "NEXUS", mascot: mascotNexus, color: "var(--nexus)",
+    tag: "Manufacturing Excellence",
+    desc: "Digitize operations, boost productivity and ensure compliance on every shift." },
+  { slug: "environ", to: "/environ", icon: Leaf, name: "ENVIRON", mascot: mascotEnviron, color: "var(--environ)",
+    tag: "EHS & Sustainability",
+    desc: "Track compliance, drive sustainability and protect what matters." },
+  { slug: "care", to: "/care", icon: HeartPulse, name: "CARE", mascot: mascotCare, color: "var(--care)",
+    tag: "Healthcare Accuracy",
+    desc: "Improve accuracy, enhance outcomes and deliver better patient care." },
 ] as const;
 
-const advantages = [
-  { icon: Sparkles, name: "Intelligent Automation", desc: "Eliminate manual work — OCR + AI built for messy physical paper." },
-  { icon: Zap, name: "Real-time Insights", desc: "Act faster, decide better. Streamed signals, never overnight reports." },
-  { icon: ShieldCheck, name: "Trust & Compliance", desc: "Built-in security and governance. Audit-ready from day one." },
-  { icon: BarChart3, name: "Scalable Impact", desc: "Grow with confidence. One module, one floor, then everywhere." },
+const voices = [
+  { name: "Operations Director · Auto Tier-1", quote: "Mushai unified four paper logs into a single shift report. Our morning meeting is now data, not opinion." },
+  { name: "EHS Head · Specialty Chemicals", quote: "Permit tracking that used to live in a binder is finally live. Audit prep went from weeks to a single afternoon." },
+  { name: "CMO · 220-bed Hospital", quote: "Care reads handwritten observations faster than our junior staff transcribes them — and never misses a critical value." },
 ];
 
 function Home() {
   return (
     <>
-      {/* HERO */}
+      {/* HERO — bento style */}
       <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid opacity-50 [mask-image:radial-gradient(70%_60%_at_50%_30%,black,transparent)]" />
+        <div className="absolute inset-0 bg-grid opacity-30 [mask-image:radial-gradient(70%_60%_at_50%_30%,black,transparent)]" />
         <div className="absolute inset-0 bg-hero-glow" />
-        <div className="absolute bottom-0 left-0 right-0 h-40 wave-lines opacity-60" />
-        <div className="relative mx-auto max-w-7xl px-5 pt-20 pb-32 grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7">
-            <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 backdrop-blur px-3.5 py-1.5 text-xs">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
-              <span className="font-display tracking-[0.28em]">AUTOMATE · INTEGRATE · ELEVATE</span>
-            </motion.div>
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.8 }}
-              className="mt-6 font-display text-5xl md:text-7xl leading-[1.05] tracking-tight"
-            >
-              Your factory is <br />
-              <span className="text-gradient-brand">losing time.</span>
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.8 }}
-              className="mt-6 max-w-xl text-lg text-muted-foreground"
-            >
-              Not because people are slow. Because systems are <span className="text-primary font-medium">disconnected</span>.
-              Mushai stitches every paper log, every shift, every floor into one intelligent surface.
-            </motion.p>
+        <div className="relative mx-auto max-w-7xl px-5 pt-16 pb-24">
+          <div className="grid lg:grid-cols-12 gap-6">
+            {/* Big mascot card */}
             <motion.div
-              initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }}
-              className="mt-9 flex flex-wrap gap-3"
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}
+              className="lg:col-span-7 relative rounded-[2rem] overflow-hidden bg-white border border-border shadow-elegant aspect-[16/11] lg:aspect-auto lg:min-h-[520px]"
             >
-              <Link to="/contact"><Button size="lg" className="rounded-full bg-primary hover:bg-primary/90 shadow-brand">Book a demo<ArrowRight className="ml-1.5 h-4 w-4" /></Button></Link>
-              <a href="#calculator"><Button size="lg" variant="outline" className="rounded-full">Calculate ROI</Button></a>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }}
-              className="mt-10 grid grid-cols-3 max-w-md gap-6"
-            >
-              {[{ k: "5×", v: "Retainer ROI" }, { k: "11w", v: "Avg payback" }, { k: "₹60K", v: "Saved / mo" }].map((s) => (
-                <div key={s.v}>
-                  <div className="font-display text-2xl md:text-3xl text-gradient-brand">{s.k}</div>
-                  <div className="mt-1 text-[11px] uppercase tracking-widest text-muted-foreground">{s.v}</div>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-          <div className="lg:col-span-5 relative">
-            <ControlTower />
-          </div>
-        </div>
-      </section>
-
-      {/* HIDDEN DELAYS */}
-      <section className="py-24 border-y border-border bg-surface-2/40">
-        <div className="mx-auto max-w-7xl px-5 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="font-display text-xs tracking-[0.32em] text-primary">EVERY SHIFT</div>
-            <h2 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">Hidden delays compound.</h2>
-            <p className="mt-5 text-muted-foreground max-w-lg">Daily operational delays come from the same four cracks — manual reporting, late approvals, paper tracking, zero real-time visibility. The cost compounds every shift.</p>
-            <div className="mt-9 space-y-4">
-              {[
-                ["Manual reporting", "Time-consuming and error-prone."],
-                ["Delayed approvals", "Bottlenecks slow everything down."],
-                ["Paper-based tracking", "Hard to track. Hard to trust."],
-                ["No real-time visibility", "Reactive, not proactive decisions."],
-              ].map(([k, v], i) => (
-                <motion.div key={k} initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }} className="flex gap-4 border-l-2 border-primary/40 pl-4">
+              <img src={mascotTrio} alt="Mushai mascots — Nexus, Environ and Care" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-white via-white/85 to-transparent p-6 md:p-8">
+                <div className="flex flex-wrap items-end justify-between gap-4">
                   <div>
-                    <div className="font-medium">{k}</div>
-                    <div className="text-sm text-muted-foreground">{v}</div>
+                    <div className="font-display text-[10px] tracking-[0.32em] text-neutral-500">THREE MODULES · ONE SYSTEM</div>
+                    <h2 className="mt-2 font-display text-2xl md:text-3xl text-neutral-900">Integrated for manufacturing, EHS &amp; care.</h2>
                   </div>
-                </motion.div>
-              ))}
-            </div>
+                  <Link to="/nexus" className="inline-flex items-center gap-1.5 rounded-full bg-neutral-900 text-white px-4 py-2 text-xs font-medium hover:bg-neutral-700 transition-colors">
+                    Explore modules <ArrowRight className="h-3.5 w-3.5" />
+                  </Link>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Headline card */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.05 }}
+              className="lg:col-span-5 relative rounded-[2rem] border border-border bg-card p-8 md:p-10 flex flex-col justify-between min-h-[420px] overflow-hidden"
+            >
+              <div className="absolute -top-32 -right-24 h-72 w-72 rounded-full blur-3xl opacity-50" style={{ background: "var(--brand)" }} />
+              <div className="relative">
+                <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card/60 backdrop-blur px-3 py-1.5 text-[10px]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" />
+                  <span className="font-display tracking-[0.28em]">AUTOMATE · INTEGRATE · ELEVATE</span>
+                </div>
+                <h1 className="mt-6 font-display text-4xl md:text-5xl leading-[1.05] tracking-tight">
+                  Digitize the<br />
+                  <span className="text-gradient-brand">physical world.</span>
+                </h1>
+                <p className="mt-5 text-sm md:text-base text-muted-foreground max-w-md">
+                  Mushai stitches every paper log, every shift, every floor into one intelligent surface. Real-time, audit-ready, ROI-positive in eleven weeks.
+                </p>
+              </div>
+              <div className="relative mt-8 flex flex-wrap gap-3">
+                <Link to="/contact"><Button size="lg" className="rounded-full bg-primary hover:bg-primary/90 shadow-brand">Book a demo <ArrowRight className="ml-1 h-4 w-4" /></Button></Link>
+                <a href="#calculator"><Button size="lg" variant="outline" className="rounded-full">Calculate ROI</Button></a>
+              </div>
+            </motion.div>
+
+            {/* KPI strip — three small cards */}
+            {[{ k: "5×", v: "Retainer ROI", d: "Pays for itself five times over." },
+              { k: "11w", v: "Avg payback", d: "From pilot signature to net positive." },
+              { k: "₹37.5K", v: "Saved / HOD / mo", d: "Reclaimed clerical hours." }].map((s, i) => (
+              <motion.div key={s.v}
+                initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 + i * 0.08 }}
+                className="lg:col-span-4 rounded-2xl border border-border bg-card p-6 flex items-center gap-5"
+              >
+                <div className="font-display text-3xl md:text-4xl text-gradient-brand shrink-0">{s.k}</div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-widest text-muted-foreground">{s.v}</div>
+                  <div className="mt-0.5 text-sm">{s.d}</div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-          <DelayPanel />
         </div>
       </section>
 
-      {/* MODULES */}
-      <section className="py-28">
+      {/* OUR MODULES — bento service cards */}
+      <section className="py-24">
         <div className="mx-auto max-w-7xl px-5">
-          <div className="max-w-2xl">
-            <div className="font-display text-xs tracking-[0.32em] text-primary">THREE MODULES · ONE ADVANTAGE</div>
-            <h2 className="mt-4 text-4xl md:text-5xl font-semibold tracking-tight">Smarter operations. Safer workplaces. Better outcomes.</h2>
+          <div className="flex items-end justify-between flex-wrap gap-6">
+            <div>
+              <div className="font-display text-xs tracking-[0.32em] text-primary">OUR MODULES</div>
+              <h2 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">Three modules.<br/><span className="text-muted-foreground">One intelligent system.</span></h2>
+            </div>
+            <Link to="/pricing" className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground">View pricing <ArrowRight className="h-3.5 w-3.5" /></Link>
           </div>
-          <div className="mt-14 grid gap-6 lg:grid-cols-3">
+
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
             {modules.map((m, i) => (
-              <motion.div key={m.slug} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}>
-                <Link to={m.to} className="group relative block h-full overflow-hidden rounded-3xl border border-border bg-card p-8 transition-all hover:-translate-y-2 hover:shadow-elegant">
-                  <div className="absolute -top-20 -right-20 h-56 w-56 rounded-full blur-3xl opacity-30 transition-opacity group-hover:opacity-60" style={{ background: m.color }} />
-                  <div className="relative">
-                    <div className="grid h-14 w-14 place-items-center rounded-2xl text-white shadow-brand" style={{ background: m.color }}>
-                      <m.icon className="h-6 w-6" />
+              <motion.div key={m.slug}
+                initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+              >
+                <Link to={m.to} className="group relative block h-full overflow-hidden rounded-[28px] border border-border bg-card transition-all hover:-translate-y-1 hover:shadow-elegant">
+                  <div className="relative aspect-[4/3] bg-white overflow-hidden border-b border-border">
+                    <img src={m.mascot} alt={`${m.name} mascot`} className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                    <div className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-3 py-1 text-[10px] font-medium" style={{ color: m.color }}>
+                      <m.icon className="h-3 w-3" /> {m.name}
                     </div>
-                    <h3 className="mt-6 font-display text-3xl tracking-wider">{m.name}</h3>
-                    <div className="mt-1 text-sm text-muted-foreground">{m.tag}</div>
-                    <ul className="mt-6 space-y-2.5 text-sm">
-                      {m.bullets.map((b) => (
-                        <li key={b} className="flex gap-2"><span className="mt-1.5 h-1 w-1 rounded-full bg-primary shrink-0" />{b}</li>
-                      ))}
-                    </ul>
-                    <div className="mt-8 inline-flex items-center gap-1.5 text-sm text-primary">Explore {m.name} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" /></div>
+                  </div>
+                  <div className="p-7">
+                    <div className="font-display text-[10px] tracking-[0.32em]" style={{ color: m.color }}>{m.tag.toUpperCase()}</div>
+                    <h3 className="mt-2 font-display text-2xl tracking-wider">{m.name}</h3>
+                    <p className="mt-3 text-sm text-muted-foreground">{m.desc}</p>
+                    <div className="mt-6 inline-flex items-center gap-1.5 text-sm">
+                      Learn more <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                    </div>
                   </div>
                 </Link>
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {advantages.map((a, i) => (
-              <motion.div key={a.name} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-                className="rounded-2xl border border-border bg-card/60 p-6">
-                <a.icon className="h-5 w-5 text-primary" />
-                <div className="mt-4 font-medium">{a.name}</div>
-                <div className="mt-1.5 text-sm text-muted-foreground">{a.desc}</div>
-              </motion.div>
-            ))}
+      {/* CONTROL TOWER — Limitless possibilities */}
+      <section className="py-24 border-y border-border bg-surface-2/40">
+        <div className="mx-auto max-w-7xl px-5 grid lg:grid-cols-12 gap-12 items-center">
+          <div className="lg:col-span-5">
+            <h2 className="font-display text-4xl md:text-5xl tracking-tight uppercase leading-[1.05]">
+              Limitless possibilities<br /><span className="text-muted-foreground">with Mushai.</span>
+            </h2>
+            <div className="mt-8 space-y-3">
+              {["Innovation", "Technology", "Experience"].map((t) => (
+                <div key={t} className="flex items-center justify-between border-b border-border pb-3 group cursor-default">
+                  <span className="text-lg">{t}</span>
+                  <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                </div>
+              ))}
+            </div>
+            <p className="mt-8 text-sm text-muted-foreground max-w-md">A live control tower that reads every signal across plant, site and ward — and surfaces only the ones worth acting on.</p>
+          </div>
+          <div className="lg:col-span-7">
+            <ControlTower />
           </div>
         </div>
       </section>
 
-      {/* CUSTOM BUILD STRIP */}
-      <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-transparent" />
-        <div className="relative mx-auto max-w-7xl px-5 grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <div className="font-display text-xs tracking-[0.32em] text-primary">CUSTOM BUILD</div>
-            <h2 className="mt-3 text-4xl md:text-5xl font-semibold">A module shaped to your floor.</h2>
-            <p className="mt-5 max-w-lg text-muted-foreground">Mushai's three modules are starting points, not endpoints. Tell us your unique workflow and we'll compose a private build that fits your industry's quirks.</p>
-            <Link to="/custom-build" className="mt-7 inline-flex"><Button size="lg" className="rounded-full bg-primary">Configure a build <ArrowRight className="ml-1 h-4 w-4" /></Button></Link>
+      {/* WHY MUSHAI bento */}
+      <section className="py-24">
+        <div className="mx-auto max-w-7xl px-5">
+          <div className="max-w-2xl">
+            <div className="font-display text-xs tracking-[0.32em] text-primary">WHY MUSHAI</div>
+            <h2 className="mt-3 text-4xl md:text-5xl font-semibold tracking-tight">Built for the way<br />the floor actually works.</h2>
           </div>
-          <div className="relative rounded-3xl border border-border bg-card p-8 shadow-elegant">
-            <div className="grid grid-cols-2 gap-3">
-              {[Factory, Leaf, HeartPulse, Workflow, ShieldCheck, BarChart3].map((Icon, i) => (
-                <motion.div key={i} initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-                  className="aspect-square rounded-2xl border border-border bg-surface-2 grid place-items-center">
-                  <Icon className="h-6 w-6 text-primary" />
-                </motion.div>
-              ))}
-            </div>
-            <div className="pointer-events-none absolute -bottom-6 -right-6 h-32 w-32 rounded-full bg-primary/30 blur-3xl" />
+
+          <div className="mt-12 grid grid-cols-6 gap-5 auto-rows-[180px]">
+            <BentoCard className="col-span-6 md:col-span-3 row-span-2" tone="dark">
+              <Sparkles className="h-5 w-5" />
+              <div className="mt-auto">
+                <div className="font-display text-2xl">Intelligent Automation</div>
+                <p className="mt-2 text-sm opacity-70 max-w-sm">OCR + AI built for messy physical paper — handwritten logs, hourly charts, lab sheets. No more typing.</p>
+              </div>
+            </BentoCard>
+            <BentoCard className="col-span-3 md:col-span-3" accent>
+              <Zap className="h-5 w-5 text-primary" />
+              <div className="mt-auto">
+                <div className="font-medium">Real-time insights</div>
+                <p className="mt-1 text-xs text-muted-foreground">Streamed signals, never overnight reports.</p>
+              </div>
+            </BentoCard>
+            <BentoCard className="col-span-3 md:col-span-2">
+              <ShieldCheck className="h-5 w-5 text-primary" />
+              <div className="mt-auto">
+                <div className="font-medium">Audit-ready</div>
+                <p className="mt-1 text-xs text-muted-foreground">Governance built in from day one.</p>
+              </div>
+            </BentoCard>
+            <BentoCard className="col-span-3 md:col-span-1 items-center text-center" stat>
+              <div className="font-display text-3xl text-gradient-brand">94%</div>
+              <div className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground">Audit zones clear</div>
+            </BentoCard>
+            <BentoCard className="col-span-6 md:col-span-3">
+              <BarChart3 className="h-5 w-5 text-primary" />
+              <div className="mt-auto">
+                <div className="font-medium">Scalable Impact</div>
+                <p className="mt-1 text-xs text-muted-foreground">One module, one floor — then everywhere.</p>
+              </div>
+            </BentoCard>
+            <BentoCard className="col-span-6 md:col-span-3" tone="primary">
+              <Workflow className="h-5 w-5" />
+              <div className="mt-auto">
+                <div className="font-display text-xl">Custom builds</div>
+                <p className="mt-1 text-xs opacity-80">Modules shaped to your workflow.</p>
+                <Link to="/custom-build" className="mt-3 inline-flex items-center gap-1 text-xs font-medium">Configure <ArrowRight className="h-3 w-3" /></Link>
+              </div>
+            </BentoCard>
           </div>
         </div>
       </section>
 
       <SwipeableFeatures />
 
+      {/* VOICES OF THE FUTURE */}
+      <section className="py-24 border-y border-border">
+        <div className="mx-auto max-w-7xl px-5 grid lg:grid-cols-12 gap-12">
+          <div className="lg:col-span-5">
+            <h2 className="font-display text-4xl md:text-5xl tracking-tight uppercase leading-[1.05]">
+              Voices of<br /><span className="text-muted-foreground">the future.</span>
+            </h2>
+            <div className="mt-6 h-px bg-border" />
+            <p className="mt-6 text-sm text-muted-foreground max-w-md">Operators, EHS leads and clinicians on what changed when Mushai went live on their floor.</p>
+          </div>
+          <div className="lg:col-span-7 space-y-4">
+            {voices.map((v, i) => (
+              <motion.div key={v.name}
+                initial={{ opacity: 0, x: 24 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                className="rounded-2xl border border-border bg-card p-6 flex items-center gap-5"
+              >
+                <div className="flex-1">
+                  <p className="text-sm">{v.quote}</p>
+                  <div className="mt-3 text-xs font-medium text-muted-foreground">{v.name}</div>
+                </div>
+                <div className="h-12 w-12 rounded-full bg-gradient-to-br from-primary to-primary/40 shrink-0 grid place-items-center text-white text-sm font-medium">
+                  {v.name.charAt(0)}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CostCalculator />
       <FloatingTestimonials />
 
-      {/* LEAD */}
       <section id="contact" className="py-24">
         <div className="mx-auto max-w-3xl px-5">
           <LeadForm />
@@ -209,40 +269,25 @@ function Home() {
   );
 }
 
-function DelayPanel() {
-  const tiles = [
-    { label: "APPROVALS PENDING", v: 12 },
-    { label: "REPORTS DELAYED", v: 8 },
-    { label: "DATA DISCONNECTED", v: 5 },
-    { label: "VISIBILITY GAPS", v: 9 },
-  ];
+function BentoCard({
+  children, className = "", tone, accent, stat,
+}: {
+  children: React.ReactNode; className?: string; tone?: "dark" | "primary"; accent?: boolean; stat?: boolean;
+}) {
+  const toneCls =
+    tone === "dark" ? "bg-[oklch(0.13_0.006_270)] text-white border-transparent"
+    : tone === "primary" ? "text-primary-foreground border-transparent"
+    : accent ? "bg-surface-2 border-border"
+    : "bg-card border-border";
   return (
-    <div className="relative aspect-square max-w-md mx-auto">
-      <div className="absolute inset-1/2 -translate-x-1/2 -translate-y-1/2 h-44 w-44 rounded-full border border-primary/30 grid place-items-center">
-        <div className="text-center">
-          <div className="font-display text-xs tracking-[0.32em] text-muted-foreground">DELAY</div>
-          <div className="mt-1 font-display text-2xl text-primary">EVERY SHIFT</div>
-        </div>
-        <div className="absolute inset-0 rounded-full border border-primary/20 animate-pulse-ring" />
-      </div>
-      {tiles.map((t, i) => {
-        const positions = ["top-0 left-0", "top-0 right-0", "bottom-0 left-0", "bottom-0 right-0"];
-        return (
-          <motion.div
-            key={t.label}
-            initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-            className={`absolute ${positions[i]} w-44 rounded-2xl border border-border bg-card p-4`}
-          >
-            <div className="flex items-center justify-between text-[10px]">
-              <span className="font-display tracking-[0.2em] text-muted-foreground">{t.label}</span>
-              <span className="h-5 w-5 rounded-full bg-primary text-primary-foreground text-[10px] grid place-items-center">{t.v}</span>
-            </div>
-            <div className="mt-2 h-1 rounded-full bg-muted">
-              <div className="h-1 rounded-full bg-primary" style={{ width: `${50 + i * 12}%` }} />
-            </div>
-          </motion.div>
-        );
-      })}
+    <div
+      className={`relative rounded-[24px] border p-6 flex flex-col overflow-hidden ${toneCls} ${className} ${stat ? "justify-center" : ""}`}
+      style={tone === "primary" ? { background: "var(--gradient-brand)" } : undefined}
+    >
+      {tone === "dark" && (
+        <div className="pointer-events-none absolute -top-20 -right-20 h-48 w-48 rounded-full blur-3xl opacity-40" style={{ background: "var(--brand)" }} />
+      )}
+      <div className="relative flex flex-col h-full">{children}</div>
     </div>
   );
 }
