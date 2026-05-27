@@ -216,6 +216,31 @@ export function NexusDashboard() {
             </ResponsiveContainer>
           </ChartCard>
         </div>
+
+        <div className="mt-6 grid gap-5 lg:grid-cols-2">
+          <LiveTicker
+            kicker="Floor-Pulse · live event stream"
+            accent="var(--nexus)"
+            events={[
+              { time: "12s",  text: "Line 2 hydraulic pressure normalized after operator reset.", tone: "ok",    tag: "L2 · PRESS" },
+              { time: "44s",  text: "Cycle time on Line 3 dropped 4.2% vs. baseline.",            tone: "ok",    tag: "L3 · WELD"  },
+              { time: "1m",   text: "Operator badge S. Rao swiped in — Line 1 changeover begin.", tone: "warn",  tag: "L1 · GATE"  },
+              { time: "2m",   text: "Energy draw on compressor #4 spiked 18% — investigating.",   tone: "alert", tag: "UTIL"       },
+              { time: "3m",   text: "Lab-Link: tensile sample TS-1188 within spec.",              tone: "ok",    tag: "QA"         },
+              { time: "5m",   text: "Carton scanner on Line 5 re-calibrated.",                    tone: "ok",    tag: "L5 · PACK"  },
+            ]}
+          />
+          <ActionQueue
+            kicker="Supervisor action queue"
+            items={[
+              { id: "n1", title: "Acknowledge L2 hydraulic alarm",       meta: "raised 4m ago · auto-dispatched",  priority: "high" },
+              { id: "n2", title: "Approve overtime for shift B closing", meta: "3 operators · ₹2,400 impact",      priority: "med"  },
+              { id: "n3", title: "Sign-off on QA sample TS-1188",        meta: "Lab-Link auto-flagged in-spec",    priority: "low"  },
+              { id: "n4", title: "Renew Cert: Forklift Op · P. Devi",    meta: "expires 12 days",                  priority: "med"  },
+              { id: "n5", title: "Review compressor #4 energy spike",    meta: "Utilities · 18% above baseline",   priority: "high" },
+            ]}
+          />
+        </div>
       </div>
     </section>
   );
