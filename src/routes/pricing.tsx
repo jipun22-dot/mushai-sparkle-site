@@ -67,11 +67,13 @@ function Pricing() {
               <div className="mt-8 grid grid-cols-2 gap-3 text-center">
                 <div className="rounded-2xl bg-surface-2 p-4">
                   <div className="text-[10px] font-display tracking-[0.28em] text-muted-foreground">SETUP</div>
-                  <div className="mt-1 font-display text-2xl">{p.setup}</div>
+                  <div className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80">Starts at</div>
+                  <div className="mt-0.5 font-display text-2xl">{p.setup}</div>
                 </div>
                 <div className="rounded-2xl bg-surface-2 p-4">
                   <div className="text-[10px] font-display tracking-[0.28em] text-muted-foreground">RETAINER / MO</div>
-                  <div className="mt-1 font-display text-2xl">{p.retainer}</div>
+                  <div className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80">Starts at</div>
+                  <div className="mt-0.5 font-display text-2xl">{p.retainer}</div>
                 </div>
               </div>
               <ul className="mt-7 space-y-3 text-sm">
