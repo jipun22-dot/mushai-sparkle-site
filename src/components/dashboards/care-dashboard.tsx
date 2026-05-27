@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Activity, ClipboardPlus, HeartPulse, ShieldAlert, Thermometer, Wind } from "lucide-react";
 import { DashboardHeader, Kpi, ChartCard } from "./nexus-dashboard";
+import { LiveTicker, ActionQueue } from "./dashboard-extras";
 
 type BedStatus = "stable" | "watch" | "critical" | "empty";
 type Bed = {
