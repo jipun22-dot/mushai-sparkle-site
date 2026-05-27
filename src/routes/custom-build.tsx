@@ -63,11 +63,14 @@ function CustomBuild() {
     <>
       <section className="relative pt-20 pb-12">
         <div className="absolute inset-0 bg-grid opacity-30 [mask-image:radial-gradient(60%_60%_at_50%_30%,black,transparent)]" />
-        <div className="relative mx-auto max-w-5xl px-5 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+          className="relative mx-auto max-w-5xl px-5 text-center"
+        >
           <div className="font-display text-xs tracking-[0.32em] text-primary">CUSTOM BUILD</div>
           <h1 className="mt-4 font-display text-5xl md:text-6xl">Compose your <span className="text-gradient-brand">private module</span>.</h1>
-          <p className="mt-5 text-muted-foreground max-w-2xl mx-auto">Pick the sub-modules that match your floor. We'll stitch them into a single deployment with one onboarding, one retainer, and one dashboard.</p>
-        </div>
+          <p className="mt-5 text-muted-foreground max-w-2xl mx-auto">Pick the sub-modules that match your floor. We'll stitch them into a single deployment with one onboarding, one retainer, and one dashboard. Pricing shown is indicative — final quote tailored to your scope.</p>
+        </motion.div>
       </section>
 
       <section className="pb-24">
