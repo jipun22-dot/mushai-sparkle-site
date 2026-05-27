@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Activity, ClipboardPlus, HeartPulse, ShieldAlert, Thermometer, Wind } from "lucide-react";
 import { DashboardHeader, Kpi, ChartCard } from "./nexus-dashboard";
+import { LiveTicker, ActionQueue } from "./dashboard-extras";
 
 type BedStatus = "stable" | "watch" | "critical" | "empty";
 type Bed = {
@@ -227,6 +228,31 @@ export function CareDashboard() {
               </BarChart>
             </ResponsiveContainer>
           </ChartCard>
+        </div>
+
+        <div className="mt-6 grid gap-5 lg:grid-cols-2">
+          <LiveTicker
+            kicker="Nurse-Assist · live bedside stream"
+            accent="var(--care)"
+            events={[
+              { time: "14s", text: "Vitals OCR pushed for ICU-3 · HR 88 · SpO₂ 96.",         tone: "ok",    tag: "ICU-3"   },
+              { time: "48s", text: "EWS escalation: Cardio-5 crossed threshold 6.",          tone: "alert", tag: "CARDIO-5"},
+              { time: "1m",  text: "Bridge-Bot synced 22 charts into HIS.",                   tone: "ok",    tag: "HIS"     },
+              { time: "3m",  text: "Claim-Guard flagged missing line item · P-1042.",        tone: "warn",  tag: "BILLING" },
+              { time: "5m",  text: "Medication round complete · Ortho ward.",                 tone: "ok",    tag: "ORTHO"   },
+              { time: "8m",  text: "Discharge summary auto-drafted for P-1019.",              tone: "ok",    tag: "ER"      },
+            ]}
+          />
+          <ActionQueue
+            kicker="On-call senior action queue"
+            items={[
+              { id: "c1", title: "Review Cardio-5 EWS escalation",        meta: "raised 48s ago · NEWS2 = 6", priority: "high" },
+              { id: "c2", title: "Re-check ICU-3 SpO₂ in 15m",            meta: "drift detected · trending", priority: "med"  },
+              { id: "c3", title: "Reconcile P-1042 billing line items",   meta: "Claim-Guard · ₹4,200 gap",   priority: "med"  },
+              { id: "c4", title: "Sign discharge summary P-1019",         meta: "auto-drafted · ER",          priority: "low"  },
+              { id: "c5", title: "Approve overnight roster · ICU",        meta: "2 nurses pending swap",      priority: "low"  },
+            ]}
+          />
         </div>
       </div>
     </section>

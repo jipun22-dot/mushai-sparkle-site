@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { AlertTriangle, FileCheck2, Leaf, ShieldCheck, Wind, Droplets } from "lucide-react";
+import { LiveTicker, ActionQueue } from "./dashboard-extras";
 import { DashboardHeader, Kpi, ChartCard } from "./nexus-dashboard";
 
 type ZoneStatus = "safe" | "watch" | "risk";
@@ -200,6 +201,31 @@ export function EnvironDashboard() {
               ))}
             </div>
           </ChartCard>
+        </div>
+
+        <div className="mt-6 grid gap-5 lg:grid-cols-2">
+          <LiveTicker
+            kicker="Permit-Check · live compliance feed"
+            accent="var(--environ)"
+            events={[
+              { time: "20s", text: "Hot-work permit HW-2241 issued · Zone B Press Bay.",        tone: "ok",    tag: "PERMIT" },
+              { time: "1m",  text: "Effluent pH variance flagged at Zone D · auto-sample sent.",tone: "alert", tag: "ZONE D" },
+              { time: "3m",  text: "Cert renewed: Confined-Space · 6 operators.",              tone: "ok",    tag: "CERT"   },
+              { time: "5m",  text: "Tank Farm vent reading back inside threshold.",            tone: "warn",  tag: "ZONE A" },
+              { time: "8m",  text: "Quarterly carbon report draft generated · 184t.",          tone: "ok",    tag: "ECO"    },
+              { time: "12m", text: "Audit finding closed: PPE compliance Zone E.",             tone: "ok",    tag: "AUDIT"  },
+            ]}
+          />
+          <ActionQueue
+            kicker="EHS lead action queue"
+            items={[
+              { id: "e1", title: "Investigate Zone D effluent pH variance",  meta: "raised 14m ago · sample pending", priority: "high" },
+              { id: "e2", title: "Sign Hot-Work permit HW-2241",             meta: "Zone B · expires in 7 days",      priority: "med"  },
+              { id: "e3", title: "Renew 4 confined-space certs",             meta: "Zone E · expiring < 30d",         priority: "med"  },
+              { id: "e4", title: "Approve quarterly carbon report",          meta: "Eco-Audit · 184t total",          priority: "low"  },
+              { id: "e5", title: "Close audit finding · PPE Zone E",         meta: "evidence uploaded by S. Iyer",    priority: "low"  },
+            ]}
+          />
         </div>
       </div>
     </section>

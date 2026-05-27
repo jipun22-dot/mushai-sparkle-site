@@ -63,11 +63,14 @@ function CustomBuild() {
     <>
       <section className="relative pt-20 pb-12">
         <div className="absolute inset-0 bg-grid opacity-30 [mask-image:radial-gradient(60%_60%_at_50%_30%,black,transparent)]" />
-        <div className="relative mx-auto max-w-5xl px-5 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+          className="relative mx-auto max-w-5xl px-5 text-center"
+        >
           <div className="font-display text-xs tracking-[0.32em] text-primary">CUSTOM BUILD</div>
           <h1 className="mt-4 font-display text-5xl md:text-6xl">Compose your <span className="text-gradient-brand">private module</span>.</h1>
-          <p className="mt-5 text-muted-foreground max-w-2xl mx-auto">Pick the sub-modules that match your floor. We'll stitch them into a single deployment with one onboarding, one retainer, and one dashboard.</p>
-        </div>
+          <p className="mt-5 text-muted-foreground max-w-2xl mx-auto">Pick the sub-modules that match your floor. We'll stitch them into a single deployment with one onboarding, one retainer, and one dashboard. Pricing shown is indicative — final quote tailored to your scope.</p>
+        </motion.div>
       </section>
 
       <section className="pb-24">
@@ -138,11 +141,13 @@ function CustomBuild() {
               <div className="mt-5 grid grid-cols-2 gap-3">
                 <div className="rounded-2xl bg-surface-2 p-4">
                   <div className="text-[10px] font-display tracking-[0.28em] text-muted-foreground">SETUP</div>
-                  <motion.div key={totals.setup} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-1 font-display text-xl">{fmt(totals.setup)}</motion.div>
+                  <div className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80">Starts at</div>
+                  <motion.div key={totals.setup} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-0.5 font-display text-xl">{fmt(totals.setup)}</motion.div>
                 </div>
                 <div className="rounded-2xl bg-surface-2 p-4">
                   <div className="text-[10px] font-display tracking-[0.28em] text-muted-foreground">RETAINER / MO</div>
-                  <motion.div key={totals.retainer} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-1 font-display text-xl">{fmt(totals.retainer)}</motion.div>
+                  <div className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80">Starts at</div>
+                  <motion.div key={totals.retainer} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-0.5 font-display text-xl">{fmt(totals.retainer)}</motion.div>
                 </div>
               </div>
 

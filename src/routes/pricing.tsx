@@ -39,11 +39,14 @@ function Pricing() {
     <>
       <section className="relative pt-20 pb-12">
         <div className="absolute inset-0 bg-grid opacity-30 [mask-image:radial-gradient(60%_60%_at_50%_30%,black,transparent)]" />
-        <div className="relative mx-auto max-w-5xl px-5 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}
+          className="relative mx-auto max-w-5xl px-5 text-center"
+        >
           <div className="font-display text-xs tracking-[0.32em] text-primary">PRICING MODEL</div>
           <h1 className="mt-4 font-display text-5xl md:text-6xl tracking-tight">A retainer that pays for itself <span className="text-gradient-brand">five times over</span>.</h1>
-          <p className="mt-5 text-muted-foreground max-w-2xl mx-auto">Transparent onboarding + monthly retainer. No per-seat. No surprise integration bills.</p>
-        </div>
+          <p className="mt-5 text-muted-foreground max-w-2xl mx-auto">Indicative starting prices below — final scope is shaped to your sites, integrations and rollout pace. Talk to us for a tailored quote.</p>
+        </motion.div>
       </section>
 
       <section className="pb-24">
@@ -67,11 +70,13 @@ function Pricing() {
               <div className="mt-8 grid grid-cols-2 gap-3 text-center">
                 <div className="rounded-2xl bg-surface-2 p-4">
                   <div className="text-[10px] font-display tracking-[0.28em] text-muted-foreground">SETUP</div>
-                  <div className="mt-1 font-display text-2xl">{p.setup}</div>
+                  <div className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80">Starts at</div>
+                  <div className="mt-0.5 font-display text-2xl">{p.setup}</div>
                 </div>
                 <div className="rounded-2xl bg-surface-2 p-4">
                   <div className="text-[10px] font-display tracking-[0.28em] text-muted-foreground">RETAINER / MO</div>
-                  <div className="mt-1 font-display text-2xl">{p.retainer}</div>
+                  <div className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80">Starts at</div>
+                  <div className="mt-0.5 font-display text-2xl">{p.retainer}</div>
                 </div>
               </div>
               <ul className="mt-7 space-y-3 text-sm">
