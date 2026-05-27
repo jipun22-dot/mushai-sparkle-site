@@ -211,7 +211,7 @@ export function EnvironDashboard() {
               { time: "20s", text: "Hot-work permit HW-2241 issued · Zone B Press Bay.",        tone: "ok",    tag: "PERMIT" },
               { time: "1m",  text: "Effluent pH variance flagged at Zone D · auto-sample sent.",tone: "alert", tag: "ZONE D" },
               { time: "3m",  text: "Cert renewed: Confined-Space · 6 operators.",              tone: "ok",    tag: "CERT"   },
-              { time: "5m',", text: "Tank Farm vent reading back inside threshold.",            tone: "warn",  tag: "ZONE A" },
+              { time: "5m",  text: "Tank Farm vent reading back inside threshold.",            tone: "warn",  tag: "ZONE A" },
               { time: "8m",  text: "Quarterly carbon report draft generated · 184t.",          tone: "ok",    tag: "ECO"    },
               { time: "12m", text: "Audit finding closed: PPE compliance Zone E.",             tone: "ok",    tag: "AUDIT"  },
             ]}
