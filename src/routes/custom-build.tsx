@@ -141,11 +141,13 @@ function CustomBuild() {
               <div className="mt-5 grid grid-cols-2 gap-3">
                 <div className="rounded-2xl bg-surface-2 p-4">
                   <div className="text-[10px] font-display tracking-[0.28em] text-muted-foreground">SETUP</div>
-                  <motion.div key={totals.setup} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-1 font-display text-xl">{fmt(totals.setup)}</motion.div>
+                  <div className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80">Starts at</div>
+                  <motion.div key={totals.setup} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-0.5 font-display text-xl">{fmt(totals.setup)}</motion.div>
                 </div>
                 <div className="rounded-2xl bg-surface-2 p-4">
                   <div className="text-[10px] font-display tracking-[0.28em] text-muted-foreground">RETAINER / MO</div>
-                  <motion.div key={totals.retainer} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-1 font-display text-xl">{fmt(totals.retainer)}</motion.div>
+                  <div className="mt-1 text-[10px] uppercase tracking-widest text-muted-foreground/80">Starts at</div>
+                  <motion.div key={totals.retainer} initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} className="mt-0.5 font-display text-xl">{fmt(totals.retainer)}</motion.div>
                 </div>
               </div>
 
