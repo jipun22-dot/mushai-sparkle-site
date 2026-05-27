@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Area, AreaChart, Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { Activity, AlertTriangle, CheckCircle2, Clock, Cog, Factory, ShieldCheck, Zap } from "lucide-react";
+import { LiveTicker, ActionQueue } from "./dashboard-extras";
 
 type LineStatus = "running" | "idle" | "fault";
 type Line = {
