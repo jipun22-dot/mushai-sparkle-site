@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Area, AreaChart, CartesianGrid, Cell, Pie, PieChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { AlertTriangle, FileCheck2, Leaf, ShieldCheck, Wind, Droplets } from "lucide-react";
+import { LiveTicker, ActionQueue } from "./dashboard-extras";
 import { DashboardHeader, Kpi, ChartCard } from "./nexus-dashboard";
 
 type ZoneStatus = "safe" | "watch" | "risk";
