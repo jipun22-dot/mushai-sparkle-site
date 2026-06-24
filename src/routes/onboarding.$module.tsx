@@ -83,17 +83,17 @@ function OnboardingInner() {
     const { data, error } = await supabase
       .from("onboarding_documents")
       .select("id,name,doc_type,size_bytes,storage_path,created_at,status")
-      .eq("module", module)
+      .eq("module", moduleKey)
       .order("created_at", { ascending: false });
     if (error) toast.error(error.message);
     else setDocs((data as Doc[]) ?? []);
     setLoading(false);
-  }, [user, module]);
+  }, [user, moduleKey]);
 
   useEffect(() => {
     setActiveType(cfg.docTypes[0].id);
     fetchDocs();
-  }, [module, cfg, fetchDocs]);
+  }, [moduleKey, cfg, fetchDocs]);
 
   async function uploadFiles(files: FileList | File[]) {
     if (!user) return;
@@ -102,11 +102,11 @@ function OnboardingInner() {
     let ok = 0;
     for (const file of list) {
       const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
-      const path = `${user.id}/${module}/${Date.now()}-${safe}`;
+      const path = `${user.id}/${moduleKey}/${Date.now()}-${safe}`;
       const { error: upErr } = await supabase.storage.from("onboarding-docs").upload(path, file, { upsert: false });
       if (upErr) { toast.error(`${file.name}: ${upErr.message}`); continue; }
       const { error: insErr } = await supabase.from("onboarding_documents").insert({
-        user_id: user.id, module, doc_type: activeType, name: file.name,
+        user_id: user.id, module: moduleKey, doc_type: activeType, name: file.name,
         size_bytes: file.size, storage_path: path, status: "uploaded",
       });
       if (insErr) { toast.error(`${file.name}: ${insErr.message}`); continue; }
