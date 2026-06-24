@@ -52,7 +52,27 @@ export function ModulePage(props: ModulePageProps) {
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.8 }}
             className="lg:col-span-5 relative">
             <div className="relative rounded-[2rem] border border-border bg-white p-0 shadow-elegant overflow-hidden">
-              <img src={props.character} alt={`${props.name} module mascot`} width={1024} height={1024} loading="lazy" className="relative w-full aspect-[4/5] object-cover" />
+              <div
+                className="relative w-full aspect-square grid place-items-center overflow-hidden"
+                style={{ background: `radial-gradient(circle at 50% 45%, color-mix(in oklab, ${accent} 18%, white) 0%, white 70%)` }}
+              >
+                {/* concentric halo behind the mascot */}
+                <div className="absolute inset-0 grid place-items-center pointer-events-none">
+                  {[0, 1, 2].map((i) => (
+                    <div key={i} className="absolute rounded-full border"
+                      style={{
+                        borderColor: `color-mix(in oklab, ${accent} ${22 - i * 6}%, transparent)`,
+                        width: `${55 + i * 18}%`, height: `${55 + i * 18}%`,
+                      }} />
+                  ))}
+                </div>
+                <img
+                  src={props.character}
+                  alt={`${props.name} module mascot`}
+                  width={1024} height={1024} loading="lazy"
+                  className="relative z-10 h-[88%] w-[88%] object-contain object-center drop-shadow-2xl"
+                />
+              </div>
               <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-3 py-1.5 text-[10px] font-medium" style={{ color: accent }}>
                 <span className="h-1.5 w-1.5 rounded-full" style={{ background: accent }} /> {props.slug.toUpperCase()} MODULE
               </div>

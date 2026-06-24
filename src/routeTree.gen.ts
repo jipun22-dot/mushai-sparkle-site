@@ -12,10 +12,14 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as NexusRouteImport } from './routes/nexus'
 import { Route as EnvironRouteImport } from './routes/environ'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as CustomBuildRouteImport } from './routes/custom-build'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CareRouteImport } from './routes/care'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as OnboardingIndexRouteImport } from './routes/onboarding.index'
+import { Route as OnboardingModuleRouteImport } from './routes/onboarding.$module'
 
 const PricingRoute = PricingRouteImport.update({
   id: '/pricing',
@@ -30,6 +34,11 @@ const NexusRoute = NexusRouteImport.update({
 const EnvironRoute = EnvironRouteImport.update({
   id: '/environ',
   path: '/environ',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CustomBuildRoute = CustomBuildRouteImport.update({
@@ -47,78 +56,121 @@ const CareRoute = CareRouteImport.update({
   path: '/care',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OnboardingIndexRoute = OnboardingIndexRouteImport.update({
+  id: '/onboarding/',
+  path: '/onboarding/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingModuleRoute = OnboardingModuleRouteImport.update({
+  id: '/onboarding/$module',
+  path: '/onboarding/$module',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/care': typeof CareRoute
   '/contact': typeof ContactRoute
   '/custom-build': typeof CustomBuildRoute
+  '/dashboard': typeof DashboardRoute
   '/environ': typeof EnvironRoute
   '/nexus': typeof NexusRoute
   '/pricing': typeof PricingRoute
+  '/onboarding/$module': typeof OnboardingModuleRoute
+  '/onboarding/': typeof OnboardingIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/care': typeof CareRoute
   '/contact': typeof ContactRoute
   '/custom-build': typeof CustomBuildRoute
+  '/dashboard': typeof DashboardRoute
   '/environ': typeof EnvironRoute
   '/nexus': typeof NexusRoute
   '/pricing': typeof PricingRoute
+  '/onboarding/$module': typeof OnboardingModuleRoute
+  '/onboarding': typeof OnboardingIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/care': typeof CareRoute
   '/contact': typeof ContactRoute
   '/custom-build': typeof CustomBuildRoute
+  '/dashboard': typeof DashboardRoute
   '/environ': typeof EnvironRoute
   '/nexus': typeof NexusRoute
   '/pricing': typeof PricingRoute
+  '/onboarding/$module': typeof OnboardingModuleRoute
+  '/onboarding/': typeof OnboardingIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/auth'
     | '/care'
     | '/contact'
     | '/custom-build'
+    | '/dashboard'
     | '/environ'
     | '/nexus'
     | '/pricing'
+    | '/onboarding/$module'
+    | '/onboarding/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/care'
     | '/contact'
     | '/custom-build'
+    | '/dashboard'
     | '/environ'
     | '/nexus'
     | '/pricing'
+    | '/onboarding/$module'
+    | '/onboarding'
   id:
     | '__root__'
     | '/'
+    | '/auth'
     | '/care'
     | '/contact'
     | '/custom-build'
+    | '/dashboard'
     | '/environ'
     | '/nexus'
     | '/pricing'
+    | '/onboarding/$module'
+    | '/onboarding/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthRoute: typeof AuthRoute
   CareRoute: typeof CareRoute
   ContactRoute: typeof ContactRoute
   CustomBuildRoute: typeof CustomBuildRoute
+  DashboardRoute: typeof DashboardRoute
   EnvironRoute: typeof EnvironRoute
   NexusRoute: typeof NexusRoute
   PricingRoute: typeof PricingRoute
+  OnboardingModuleRoute: typeof OnboardingModuleRoute
+  OnboardingIndexRoute: typeof OnboardingIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -144,6 +196,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EnvironRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/custom-build': {
       id: '/custom-build'
       path: '/custom-build'
@@ -165,6 +224,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CareRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -172,28 +238,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/onboarding/': {
+      id: '/onboarding/'
+      path: '/onboarding'
+      fullPath: '/onboarding/'
+      preLoaderRoute: typeof OnboardingIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding/$module': {
+      id: '/onboarding/$module'
+      path: '/onboarding/$module'
+      fullPath: '/onboarding/$module'
+      preLoaderRoute: typeof OnboardingModuleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthRoute: AuthRoute,
   CareRoute: CareRoute,
   ContactRoute: ContactRoute,
   CustomBuildRoute: CustomBuildRoute,
+  DashboardRoute: DashboardRoute,
   EnvironRoute: EnvironRoute,
   NexusRoute: NexusRoute,
   PricingRoute: PricingRoute,
+  OnboardingModuleRoute: OnboardingModuleRoute,
+  OnboardingIndexRoute: OnboardingIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
