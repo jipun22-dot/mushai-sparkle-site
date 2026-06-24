@@ -66,8 +66,9 @@ type Doc = {
 };
 
 function OnboardingInner() {
-  const { module } = useParams({ from: "/onboarding/$module" });
-  const cfg = moduleConfig[module] ?? moduleConfig.nexus;
+  const params = useParams({ from: "/onboarding/$module" });
+  const moduleKey = (params.module as ModuleKey) in moduleConfig ? (params.module as ModuleKey) : "nexus";
+  const cfg = moduleConfig[moduleKey];
   const { user } = useAuth();
   const [docs, setDocs] = useState<Doc[]>([]);
   const [loading, setLoading] = useState(true);
