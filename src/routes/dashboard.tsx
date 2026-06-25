@@ -7,6 +7,7 @@ import { AuthGate } from "@/components/auth-gate";
 import { NexusDashboard } from "@/components/dashboards/nexus-dashboard";
 import { EnvironDashboard } from "@/components/dashboards/environ-dashboard";
 import { CareDashboard } from "@/components/dashboards/care-dashboard";
+import { DocumentsInsights } from "@/components/dashboards/documents-insights";
 import { useAuth } from "@/lib/use-auth";
 
 export const Route = createFileRoute("/dashboard")({
