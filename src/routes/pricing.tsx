@@ -55,10 +55,11 @@ function Pricing() {
             <motion.div
               key={p.name}
               initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-              className={`relative rounded-3xl border bg-card p-8 ${p.popular ? "border-primary shadow-brand" : "border-border"}`}
+              className={`relative rounded-3xl border bg-card p-8 ${p.popular ? "shadow-brand" : "border-border"}`}
+              style={p.popular ? { borderColor: p.accent, boxShadow: `0 0 0 1px ${p.accent}, 0 24px 60px -30px ${p.accent}` } : undefined}
             >
               {p.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-[10px] font-display tracking-[0.28em] text-primary-foreground">MOST POPULAR</div>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-[10px] font-display tracking-[0.28em] text-white" style={{ background: p.accent }}>MOST POPULAR</div>
               )}
               <div className="flex items-start justify-between">
                 <div>
