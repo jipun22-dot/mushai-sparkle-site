@@ -24,7 +24,7 @@ const plans = [
     name: "NEXUS + ENVIRON", tag: "Most popular", popular: true,
     setup: "₹4,00,000", retainer: "₹1,35,000",
     features: ["Everything in Nexus", "Permit-Check & Cert-Watch", "Log-Vision safety logs", "Eco-Audit carbon tracking", "Industrial heatmap dashboard", "Quarterly compliance review"],
-    accent: "var(--primary)",
+    accent: "var(--nexus)",
   },
   {
     name: "CARE", tag: "Healthcare focused",
@@ -55,10 +55,11 @@ function Pricing() {
             <motion.div
               key={p.name}
               initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-              className={`relative rounded-3xl border bg-card p-8 ${p.popular ? "border-primary shadow-brand" : "border-border"}`}
+              className={`relative rounded-3xl border bg-card p-8 ${p.popular ? "shadow-brand" : "border-border"}`}
+              style={p.popular ? { borderColor: p.accent, boxShadow: `0 0 0 1px ${p.accent}, 0 24px 60px -30px ${p.accent}` } : undefined}
             >
               {p.popular && (
-                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-primary px-3 py-1 text-[10px] font-display tracking-[0.28em] text-primary-foreground">MOST POPULAR</div>
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full px-3 py-1 text-[10px] font-display tracking-[0.28em] text-white" style={{ background: p.accent }}>MOST POPULAR</div>
               )}
               <div className="flex items-start justify-between">
                 <div>
@@ -85,7 +86,7 @@ function Pricing() {
                 ))}
               </ul>
               <Link to="/contact" className="mt-8 block">
-                <Button className={`w-full rounded-full ${p.popular ? "bg-primary hover:bg-primary/90" : "bg-foreground text-background hover:bg-foreground/90"}`}>Explore <ArrowRight className="ml-1 h-4 w-4" /></Button>
+                <Button className="w-full rounded-full text-white hover:opacity-90" style={{ background: p.accent }}>Explore <ArrowRight className="ml-1 h-4 w-4" /></Button>
               </Link>
             </motion.div>
           ))}
