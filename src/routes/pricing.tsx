@@ -86,7 +86,7 @@ function Pricing() {
                 ))}
               </ul>
               <Link to="/contact" className="mt-8 block">
-                <Button className={`w-full rounded-full ${p.popular ? "bg-primary hover:bg-primary/90" : "bg-foreground text-background hover:bg-foreground/90"}`}>Explore <ArrowRight className="ml-1 h-4 w-4" /></Button>
+                <Button className="w-full rounded-full text-white hover:opacity-90" style={{ background: p.accent }}>Explore <ArrowRight className="ml-1 h-4 w-4" /></Button>
               </Link>
             </motion.div>
           ))}
