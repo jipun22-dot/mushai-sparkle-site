@@ -24,7 +24,7 @@ const plans = [
     name: "NEXUS + ENVIRON", tag: "Most popular", popular: true,
     setup: "₹4,00,000", retainer: "₹1,35,000",
     features: ["Everything in Nexus", "Permit-Check & Cert-Watch", "Log-Vision safety logs", "Eco-Audit carbon tracking", "Industrial heatmap dashboard", "Quarterly compliance review"],
-    accent: "var(--primary)",
+    accent: "var(--nexus)",
   },
   {
     name: "CARE", tag: "Healthcare focused",
