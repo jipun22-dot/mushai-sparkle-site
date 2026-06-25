@@ -54,7 +54,7 @@ export function ModulePage(props: ModulePageProps) {
             <div className="relative rounded-[2rem] border border-border bg-white p-0 shadow-elegant overflow-hidden">
               <div
                 className="relative w-full aspect-square grid place-items-center overflow-hidden"
-                style={{ background: `radial-gradient(circle at 50% 45%, color-mix(in oklab, ${accent} 18%, white) 0%, white 70%)` }}
+                style={{ background: `radial-gradient(circle at 50% 50%, color-mix(in oklab, ${accent} 18%, white) 0%, white 70%)` }}
               >
                 {/* concentric halo behind the mascot */}
                 <div className="absolute inset-0 grid place-items-center pointer-events-none">
@@ -69,8 +69,8 @@ export function ModulePage(props: ModulePageProps) {
                 <img
                   src={props.character}
                   alt={`${props.name} module mascot`}
-                  width={1024} height={1024} loading="lazy"
-                  className="relative z-10 h-[88%] w-[88%] object-contain object-center drop-shadow-2xl"
+                  width={460} height={380} loading="lazy"
+                  className="relative z-10 w-full h-full object-contain object-center drop-shadow-2xl"
                 />
               </div>
               <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-3 py-1.5 text-[10px] font-medium" style={{ color: accent }}>
