@@ -88,6 +88,7 @@ function DashboardInner() {
             {active === "nexus" && <NexusDashboard />}
             {active === "environ" && <EnvironDashboard />}
             {active === "care" && <CareDashboard />}
+            <DocumentsInsights module={active} accent={modules.find((m) => m.key === active)!.color} />
           </motion.div>
         </AnimatePresence>
       </div>
