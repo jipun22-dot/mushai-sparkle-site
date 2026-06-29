@@ -7,6 +7,7 @@ import { CostCalculator } from "@/components/cost-calculator";
 import { LeadForm } from "@/components/lead-form";
 import { ControlTower } from "@/components/control-tower";
 import { SwipeableFeatures } from "@/components/swipeable-features";
+import { StepsSection } from "@/components/steps-section";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -261,6 +262,7 @@ function Home() {
         </div>
       </section>
 
+      <StepsSection />
       <CostCalculator />
       <FloatingTestimonials />
 
