@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Activity, Radio, Gauge, Cpu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ExpandableFeatures, type ExpandableFeature } from "./expandable-features";
 import { LeadForm } from "./lead-form";
@@ -13,7 +13,8 @@ export type ModulePageProps = {
   accent: "nexus" | "environ" | "care";
   features: ExpandableFeature[];
   proof: { stat: string; label: string }[];
-  character: string;
+  /** Optional — kept for backwards compatibility; no longer rendered. */
+  character?: string;
   pitch: string;
   dashboard: React.ReactNode;
 };
@@ -51,36 +52,7 @@ export function ModulePage(props: ModulePageProps) {
           </motion.div>
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.2, duration: 0.8 }}
             className="lg:col-span-5 relative">
-            <div className="relative rounded-[2rem] border border-border bg-white p-0 shadow-elegant overflow-hidden">
-              <div
-                className="relative w-full aspect-square grid place-items-center overflow-hidden"
-                style={{ background: `radial-gradient(circle at 50% 50%, color-mix(in oklab, ${accent} 18%, white) 0%, white 70%)` }}
-              >
-                {/* concentric halo behind the mascot */}
-                <div className="absolute inset-0 grid place-items-center pointer-events-none">
-                  {[0, 1, 2].map((i) => (
-                    <div key={i} className="absolute rounded-full border"
-                      style={{
-                        borderColor: `color-mix(in oklab, ${accent} ${22 - i * 6}%, transparent)`,
-                        width: `${55 + i * 18}%`, height: `${55 + i * 18}%`,
-                      }} />
-                  ))}
-                </div>
-                <img
-                  src={props.character}
-                  alt={`${props.name} module mascot`}
-                  width={460} height={380} loading="lazy"
-                  className="relative z-10 w-full h-full object-contain object-center drop-shadow-2xl"
-                />
-              </div>
-              <div className="absolute top-4 right-4 inline-flex items-center gap-1.5 rounded-full bg-white/90 backdrop-blur px-3 py-1.5 text-[10px] font-medium" style={{ color: accent }}>
-                <span className="h-1.5 w-1.5 rounded-full" style={{ background: accent }} /> {props.slug.toUpperCase()} MODULE
-              </div>
-              <div className="relative p-5 border-t border-border bg-white text-neutral-900">
-                <div className="font-display text-[10px] tracking-[0.32em]" style={{ color: accent }}>THE PITCH</div>
-                <p className="mt-2 text-sm text-neutral-700">{props.pitch}</p>
-              </div>
-            </div>
+            <ModuleHeroVisual accent={accent} slug={props.slug} pitch={props.pitch} />
           </motion.div>
         </div>
       </section>
@@ -103,5 +75,76 @@ export function ModulePage(props: ModulePageProps) {
         </div>
       </section>
     </>
+  );
+}
+
+function ModuleHeroVisual({ accent, slug, pitch }: { accent: string; slug: string; pitch: string }) {
+  return (
+    <div className="relative rounded-[2rem] border border-border overflow-hidden shadow-elegant bg-[oklch(0.13_0.006_270)] text-white">
+      {/* glow */}
+      <div className="absolute -top-24 -right-24 h-80 w-80 rounded-full blur-3xl opacity-50" style={{ background: accent }} />
+      <div className="absolute inset-0 bg-grid opacity-20 [mask-image:radial-gradient(60%_60%_at_50%_50%,black,transparent)]" />
+
+      <div className="relative aspect-square p-6 flex flex-col">
+        <div className="flex items-center justify-between">
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-white/10 backdrop-blur px-3 py-1.5 text-[10px] font-medium">
+            <span className="h-1.5 w-1.5 rounded-full animate-pulse" style={{ background: accent }} /> {slug.toUpperCase()} · LIVE
+          </div>
+          <div className="text-[10px] font-display tracking-[0.28em] opacity-60">MODULE</div>
+        </div>
+
+        {/* Orbiting rings */}
+        <div className="relative flex-1 grid place-items-center">
+          {[0, 1, 2, 3].map((i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full border"
+              style={{
+                borderColor: `color-mix(in oklab, ${accent} ${28 - i * 6}%, transparent)`,
+                width: `${40 + i * 18}%`, aspectRatio: "1 / 1",
+              }}
+              animate={{ rotate: i % 2 === 0 ? 360 : -360 }}
+              transition={{ duration: 18 + i * 6, ease: "linear", repeat: Infinity }}
+            >
+              <div
+                className="absolute h-2 w-2 rounded-full -translate-x-1/2 -translate-y-1/2"
+                style={{ background: accent, top: i % 2 === 0 ? 0 : "100%", left: i % 2 === 0 ? "50%" : "50%" }}
+              />
+            </motion.div>
+          ))}
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.2 }}
+            className="relative grid h-24 w-24 place-items-center rounded-2xl backdrop-blur-md"
+            style={{ background: `color-mix(in oklab, ${accent} 25%, transparent)`, boxShadow: `0 0 60px -5px ${accent}` }}
+          >
+            <span className="font-display text-2xl tracking-[0.2em]">{slug.slice(0, 2).toUpperCase()}</span>
+          </motion.div>
+        </div>
+
+        {/* Live mini-metrics */}
+        <div className="relative grid grid-cols-3 gap-2">
+          {[
+            { icon: Activity, k: "Signals", v: "1.2k/s" },
+            { icon: Gauge,    k: "Load",    v: "62%" },
+            { icon: Radio,    k: "Nodes",   v: "184" },
+          ].map((m, i) => (
+            <motion.div key={m.k}
+              initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3 + i * 0.08 }}
+              className="rounded-xl bg-white/5 backdrop-blur border border-white/10 p-2.5"
+            >
+              <div className="flex items-center gap-1.5 text-[9px] opacity-70"><m.icon className="h-3 w-3" />{m.k.toUpperCase()}</div>
+              <div className="mt-1 font-display text-sm tabular-nums" style={{ color: accent }}>{m.v}</div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative p-5 border-t border-white/10 bg-black/30">
+        <div className="font-display text-[10px] tracking-[0.32em] inline-flex items-center gap-1.5" style={{ color: accent }}>
+          <Cpu className="h-3 w-3" /> THE PITCH
+        </div>
+        <p className="mt-2 text-sm opacity-85">{pitch}</p>
+      </div>
+    </div>
   );
 }
