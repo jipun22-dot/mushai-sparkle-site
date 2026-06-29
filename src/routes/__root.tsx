@@ -14,6 +14,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Toaster } from "@/components/ui/sonner";
 import { AuthProvider } from "@/lib/use-auth";
+import { CurrencyProvider } from "@/lib/currency";
 
 function NotFoundComponent() {
   return (
@@ -78,12 +79,14 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <ThemeProvider>
         <AuthProvider>
-          <div className="min-h-screen flex flex-col">
-            <SiteHeader />
-            <main className="flex-1"><Outlet /></main>
-            <SiteFooter />
-          </div>
-          <Toaster position="top-right" />
+          <CurrencyProvider>
+            <div className="min-h-screen flex flex-col">
+              <SiteHeader />
+              <main className="flex-1"><Outlet /></main>
+              <SiteFooter />
+            </div>
+            <Toaster position="top-right" />
+          </CurrencyProvider>
         </AuthProvider>
       </ThemeProvider>
     </QueryClientProvider>

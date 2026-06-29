@@ -2,7 +2,7 @@ import { createFileRoute, Link, useParams } from "@tanstack/react-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { toast } from "sonner";
-import { Upload, FileText, Trash2, Loader2, CheckCircle2, ArrowLeft, Factory, Leaf, HeartPulse } from "lucide-react";
+import { Upload, FileText, Trash2, Loader2, CheckCircle2, ArrowLeft, Factory, Leaf, HeartPulse, Camera, FileType2, ScanLine, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AuthGate } from "@/components/auth-gate";
 import { supabase } from "@/integrations/supabase/client";
@@ -192,6 +192,31 @@ function OnboardingInner() {
                 {uploading ? "Uploading…" : "Choose files"}
               </Button>
             </motion.div>
+
+            <div className="rounded-[28px] border border-border bg-card p-6">
+              <div className="flex items-center justify-between">
+                <div className="font-display text-sm tracking-[0.2em] uppercase">How to upload well</div>
+                <div className="text-[10px] font-display tracking-[0.28em] text-muted-foreground">4 QUICK RULES</div>
+              </div>
+              <div className="mt-5 grid sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                {[
+                  { icon: Camera,     title: "Sharp & flat",   desc: "Lay paper flat, hold camera parallel. No motion blur, no shadows across text." },
+                  { icon: ScanLine,   title: "Even lighting",  desc: "Daylight or two desk lamps. Avoid glare on glossy lab sheets or HMI screens." },
+                  { icon: FileType2,  title: "One doc per file", desc: "Multi-page PDFs are great; don't merge unrelated forms into one PDF." },
+                  { icon: ShieldCheck,title: "Redact PII",     desc: "Black out patient IDs, Aadhaar, or anything legally restricted before upload." },
+                ].map((t, i) => (
+                  <motion.div key={t.title}
+                    initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
+                    className="rounded-2xl border border-border bg-surface-2 p-4">
+                    <div className="grid h-9 w-9 place-items-center rounded-xl text-white" style={{ background: cfg.color }}>
+                      <t.icon className="h-4 w-4" />
+                    </div>
+                    <div className="mt-3 font-display text-sm tracking-wider">{t.title}</div>
+                    <p className="mt-1 text-[11px] text-muted-foreground leading-relaxed">{t.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
 
             <div className="rounded-[28px] border border-border bg-card">
               <div className="flex items-center justify-between px-6 py-4 border-b border-border">
